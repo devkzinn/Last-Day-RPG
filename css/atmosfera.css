@@ -1,0 +1,12 @@
+/* Atmosfera: luz do dia, entardecer, noite e clima. */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.45) 100%);transition:background 1.5s}
+body[data-luz="entardecer"]::after{background:radial-gradient(ellipse at 50% 45%,rgba(120,60,20,.05) 40%,rgba(30,10,0,.55) 100%)}
+body[data-luz="noite"]::after{background:radial-gradient(ellipse at 50% 40%,rgba(10,20,40,.12) 25%,rgba(2,4,12,.85) 100%)}
+body[data-luz="noite"] #app{filter:brightness(.82) saturate(.8)}
+body::before{content:"";position:fixed;inset:-20% 0;pointer-events:none;z-index:39;opacity:0;background:repeating-linear-gradient(104deg,transparent 0 16px,rgba(170,195,230,.2) 16px 17px)}
+body[data-clima="chuva"]::before,body[data-clima="tempestade"]::before{opacity:1;animation:chuva .7s linear infinite}
+body[data-clima="tempestade"]::before{background:repeating-linear-gradient(100deg,transparent 0 10px,rgba(170,195,230,.34) 10px 11px)}
+body[data-clima="tempestade"] #app{animation:relampago 9s steps(1) infinite}
+@keyframes chuva{from{transform:translate(0,0)}to{transform:translate(-40px,80px)}}
+@keyframes relampago{0%,93%,100%{filter:none}94%{filter:brightness(1.7)}95.5%{filter:none}97%{filter:brightness(1.35)}98%{filter:none}}
+@media (prefers-reduced-motion:reduce){body::before,body[data-clima="tempestade"] #app{animation:none}}
